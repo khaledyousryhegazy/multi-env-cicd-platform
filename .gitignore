@@ -1,5 +1,82 @@
-*.env
-.env*
-.terraform*
-terraform.tfstate*
+# =========================================================================
+# 1. INFRASTRUCTURE AS CODE (IaC) & CONFIGURATION MANAGEMENT
+# =========================================================================
+
+# --- Terraform & OpenTofu ---
+.terraform/
+*.tfstate
+*.tfstate.backup
+*.tfstate.lock.info
+*.tfvars
+*.tfvars.json
+*tfplan*
+crash.log
+
+# --- Ansible ---
+*.retry
+ansible.log
+.ansible_cache/
+
+# --- Packer ---
+packer_cache/
+*.box
+
+# --- Pulumi ---
+.pulumi/
+
+# =========================================================================
+# 2. CONTAINERS & VIRTUALIZATION
+# =========================================================================
+
+# --- Docker ---
+.docker/
+docker-compose.override.yml
+
+# --- Vagrant ---
+.vagrant/
+
+# =========================================================================
+# 3. CI/CD PIPELINES & ARTIFACTS
+# =========================================================================
+
+# --- Local Pipeline Runners ---
+.act/
+.gitlab-ci.local/
+.azure-pipelines-local/
+
+# --- Build & Artifact Outputs ---
+dist/
+build/
+bin/
+obj/
+*.kubeconfig
+kubeconfig
+
+# =========================================================================
+# 4. SECRETS, ENVIRONMENT, & LOGS
+# =========================================================================
+
+# --- Secrets & Environment Files ---
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.pub
+secrets.yaml
+
+# --- System & Operational Logs ---
+*.log
+logs/
+
+# =========================================================================
+# 5. IDEs & OPERATING SYSTEMS
+# =========================================================================
+
+# --- VS Code, IntelliJ, & Mac/Windows ---
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
 notes.md
