@@ -12,6 +12,11 @@ resource "aws_iam_role_policy" "github_ecr" {
     Version = "2012-10-17"
     Statement = [
       {
+        Effect   = "Allow"
+        Action   = ["ecr:GetAuthorizationToken"]
+        Resource = "*"
+      },
+      {
         Effect = "Allow"
         Action = [
           "ecr:GetDownloadUrlForLayer",
@@ -21,7 +26,6 @@ resource "aws_iam_role_policy" "github_ecr" {
           "ecr:InitiateLayerUpload",
           "ecr:UploadLayerPart",
           "ecr:CompleteLayerUpload",
-          "ecr:GetAuthorizationToken",
           "eks:UpdateClusterConfig",
           "eks:DescribeCluster",
           "sts:AssumeRole"
