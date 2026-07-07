@@ -29,8 +29,8 @@ jobs:
         uses: aws-actions/configure-aws-credentials@v6.1.0
         with:
           audience: sts.amazonaws.com
-          aws-region: us-east-1
-          role-to-assume: arn:aws:iam::661975751370:role/GitHubActions
+          aws-region: ${{ secrets.AWS_REGION }}
+          role-to-assume: ${{ secrets.ROLE_TO_ASSUME }}
           role-session-name: github-actions-session
 
       - name: Login to Amazon ECR
