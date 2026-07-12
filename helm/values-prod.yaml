@@ -1,9 +1,9 @@
 frontend:
   image:
     repository: 604275788373.dkr.ecr.us-east-1.amazonaws.com/multi-cicd-frontend-repo
-    tag: c590b1dd97852746d41551bdb1aa2079f2ffd297
+    tag: 4e259934c3b16e4508fcc3ca2186530b7332ce73
 
 backend:
   image:
     repository: 604275788373.dkr.ecr.us-east-1.amazonaws.com/multi-cicd-backend-repo
-    tag: c590b1dd97852746d41551bdb1aa2079f2ffd297
+    tag: 4e259934c3b16e4508fcc3ca2186530b7332ce73
