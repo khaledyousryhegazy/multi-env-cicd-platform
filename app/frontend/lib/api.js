@@ -1,6 +1,6 @@
 const API_URL =
   process.env.NEXT_PUBLIC_API_URL ||
-  "http://a8974e78d46ea45238ac773cd0cdaad2-314712893.us-east-1.elb.amazonaws.com:4000/api";
+  "http://a77187f9f76e94a14ad6ea8067fced63-1474404180.us-east-1.elb.amazonaws.com:4000/api";
 
 async function request(path, options = {}) {
   const res = await fetch(`${API_URL}${path}`, {

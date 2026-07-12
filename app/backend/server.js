@@ -13,7 +13,7 @@ app.use(
   cors({
     origin:
       process.env.FRONTEND_URL ||
-      "http://a4b49e1f5656b472aa1d5e235d0d9312-1901052262.us-east-1.elb.amazonaws.com",
+      "http://aede4cc2b85704a33b5a93283a1922f2-1115593351.us-east-1.elb.amazonaws.com",
   }),
 );
 app.use(express.json());
