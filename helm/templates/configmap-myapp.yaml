@@ -3,9 +3,7 @@ data:
   .env: |
     PORT=4000
     DB_PORT=5432
-    FRONTEND_URL=abe0052f38e26434ba0a36b12be115c1-448319764.us-east-1.elb.amazonaws.com
+    FRONTEND_URL=http://a4b49e1f5656b472aa1d5e235d0d9312-1901052262.us-east-1.elb.amazonaws.com
 kind: ConfigMap
 metadata:
-  creationTimestamp: "2026-07-09T11:46:05Z"
   name: configmap-myapp
-  resourceVersion: "27652"
