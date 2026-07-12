@@ -1,4 +1,0 @@
-backend:
-  image:
-    repository: khaledyousry/quran_app-backend
-    tag: latest

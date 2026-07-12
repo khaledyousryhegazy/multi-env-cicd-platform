@@ -1,0 +1,9 @@
+frontend:
+  image:
+    repository: 604275788373.dkr.ecr.us-east-1.amazonaws.com/multi-cicd-frontend-repo
+    tag: latest
+
+backend:
+  image:
+    repository: 604275788373.dkr.ecr.us-east-1.amazonaws.com/multi-cicd-backend-repo
+    tag: latest

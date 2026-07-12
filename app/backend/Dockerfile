@@ -10,6 +10,7 @@ FROM node:20-alpine
 WORKDIR /app
 COPY package*.json .
 RUN npm ci -omit=dev
+RUN apk add --no-cache postgresql-client
 
 COPY --from=builder /app/controllers ./controllers
 COPY --from=builder /app/db ./db

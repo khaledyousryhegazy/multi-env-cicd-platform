@@ -1,0 +1,51 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: my-app-init-db
+  annotations:
+    "helm.sh/hook": post-install
+    "helm.sh/hook-weight": "10"
+    "helm.sh/hook-delete-policy": before-hook-creation,hook-succeeded
+spec:
+  backoffLimit: 5
+
+  template:
+    spec:
+      restartPolicy: OnFailure
+
+      containers:
+        - name: db-init
+
+          image: "{{ .Values.backend.image.repository }}:{{ .Values.backend.image.tag }}"
+          imagePullPolicy: IfNotPresent
+
+          envFrom:
+            - secretRef:
+                name: secret-myapp
+            - configMapRef:
+                name: configmap-myapp
+
+          env:
+            - name: PGPASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: secret-myapp
+                  key: DB_PASSWORD
+
+          command:
+            - /bin/sh
+            - -c
+            - |
+              echo "[*] Running database schema..."
+
+              psql \
+                -h "$DB_HOST" \
+                -U "$DB_USER" \
+                -d "$DB_NAME" \
+                -f /app/backend/db/schema.sql
+
+              echo "[*] Running seed..."
+
+              node /app/backend/db/seed.js
+
+              echo "[*] Database initialized successfully."

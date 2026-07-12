@@ -25,3 +25,8 @@ output "github_role_arn" {
 output "vpc_id" {
   value = module.vpc.vpc_id
 }
+
+# RDS
+output "rds_endpoint" {
+  value = module.rds.db_instance_endpoint
+}

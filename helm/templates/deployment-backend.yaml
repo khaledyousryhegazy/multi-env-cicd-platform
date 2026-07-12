@@ -27,11 +27,12 @@ spec:
       containers:
         - name: backend-container
           image: "{{ .Values.backend.image.repository }}:{{ .Values.backend.image.tag }}"
+          imagePullPolicy: Always
           ports:
             - containerPort: 4000
           envFrom:
-            - configMapRef: 
-                name: configmap-backend
+            - configMapRef:
+                name: configmap-myapp
             - secretRef:
                 name: secret-myapp
           resources:
@@ -45,11 +46,11 @@ spec:
             httpGet:
               path: /
               port: 4000
-              initialDelaySeconds: 15
-              periodSeconds: 20
+            initialDelaySeconds: 15
+            periodSeconds: 20
           readinessProbe:
             httpGet:
               path: /
               port: 4000
-              initialDelaySeconds: 5
-              periodSeconds: 10
+            initialDelaySeconds: 5
+            periodSeconds: 10

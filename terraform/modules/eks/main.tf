@@ -1,4 +1,3 @@
-
 module "eks" {
   source  = "terraform-aws-modules/eks/aws"
   version = "~> 21.0"
@@ -17,8 +16,24 @@ module "eks" {
     }
   }
 
-  vpc_id     = var.vpc_id
-  subnet_ids = var.private_subnets
+  vpc_id                  = var.vpc_id
+  subnet_ids              = var.private_subnets
+  endpoint_public_access  = true
+  endpoint_private_access = true
+  authentication_mode     = "API"
+  access_entries = {
+    khaled = {
+      principal_arn = "arn:aws:iam::604275788373:user/khaled"
+      policy_associations = {
+        admin = {
+          policy_arn = "arn:aws:eks::aws:cluster-access-policy/AmazonEKSClusterAdminPolicy"
+          access_scope = {
+            type = "cluster"
+          }
+        }
+      }
+    }
+  }
 
   eks_managed_node_groups = {
     mygroup = {
