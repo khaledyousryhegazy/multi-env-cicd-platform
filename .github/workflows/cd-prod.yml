@@ -34,7 +34,7 @@ jobs:
       - name: Update Kubeconfig
         run: |
           aws --version
-          aws sts get-identity-caller
+          aws sts get-caller-identity
           aws eks update-kubeconfig --name multi-cicd-eks --region ${{ secrets.AWS_REGION }}
           kubectl get nodes
 
