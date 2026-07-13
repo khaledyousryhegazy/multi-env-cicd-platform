@@ -2,7 +2,11 @@ module "oidc_github" {
   source  = "unfunco/oidc-github/aws"
   version = "~> 3.0"
 
-  github_subjects = ["khaledyousryhegazy/multi-env-cicd-platform"]
+  github_subjects = [
+    "khaledyousryhegazy/multi-env-cicd-platform:ref:refs/heads/main",
+    "khaledyousryhegazy/multi-env-cicd-platform:ref:refs/heads/develop",
+    "khaledyousryhegazy/multi-env-cicd-platform:environment:production"
+  ]
 }
 
 resource "aws_iam_role_policy" "github_ecr" {

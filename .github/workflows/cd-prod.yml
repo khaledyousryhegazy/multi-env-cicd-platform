@@ -11,6 +11,7 @@ jobs:
   setup-infra-deploy:
     if: github.event.workflow_run.conclusion == 'success'
     runs-on: ubuntu-latest
+
     permissions:
       id-token: write
       contents: read
