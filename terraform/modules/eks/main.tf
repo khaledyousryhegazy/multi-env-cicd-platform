@@ -24,6 +24,20 @@ module "eks" {
   access_entries = {
     khaled = {
       principal_arn = "arn:aws:iam::604275788373:user/khaled"
+
+      policy_associations = {
+        admin = {
+          policy_arn = "arn:aws:eks::aws:cluster-access-policy/AmazonEKSClusterAdminPolicy"
+          access_scope = {
+            type = "cluster"
+          }
+        }
+      }
+    }
+
+    github = {
+      principal_arn = "arn:aws:iam::604275788373:role/GitHubActions"
+
       policy_associations = {
         admin = {
           policy_arn = "arn:aws:eks::aws:cluster-access-policy/AmazonEKSClusterAdminPolicy"
