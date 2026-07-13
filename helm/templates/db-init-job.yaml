@@ -41,10 +41,10 @@ spec:
                 -h "$DB_HOST" \
                 -U "$DB_USER" \
                 -d "$DB_NAME" \
-                -f /app/backend/db/schema.sql
+                -f db/schema.sql
 
               echo "[*] Running seed..."
 
-              node /app/backend/db/seed.js
-
+              node db/seed.js
+              node db/create-mentor.js "khaled yousry" "khaled@admin.com" "000000" "mentor with egaza in quran hafs from assem"
               echo "[*] Database initialized successfully."

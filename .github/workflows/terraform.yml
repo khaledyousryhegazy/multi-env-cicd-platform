@@ -1,0 +1,29 @@
+name: Apply Terraform
+on:
+  workflow_dispatch:
+
+jobs:
+  apply-terraform:
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v7.0.0
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v4.0.1
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v6.1.0
+        with:
+          audience: sts.amazonaws.com
+          aws-region: ${{ secrets.AWS_REGION }}
+          role-to-assume: ${{ secrets.ROLE_TO_ASSUME }}
+          role-session-name: github-actions-session
+
+      - name: Apply Infrastructure
+        run: |
+          cd terraform/
+          terraform init
+          terraform plan
+          terraform apply -auto-approve

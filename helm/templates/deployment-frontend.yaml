@@ -6,7 +6,7 @@ metadata:
     app.kubernetes.io/name: frontend-deployment
     app.kubernetes.io/managed-by: Helm
 spec:
-  replicas: 2
+  replicas: {{ .Values.frontend.replicaCount | int }}
   selector:
     matchLabels:
       app.kubernetes.io/name: frontend-deployment
@@ -35,11 +35,11 @@ spec:
               value: "http://a77187f9f76e94a14ad6ea8067fced63-1474404180.us-east-1.elb.amazonaws.com:4000/api"
           resources:
             requests:
-              cpu: "250m"
-              memory: "256Mi"
+              cpu: "{{ .Values.resources.requests.cpu }}"
+              memory: "{{ .Values.resources.requests.memory }}"
             limits:
-              cpu: "500m"
-              memory: "512Mi"
+              cpu: "{{ .Values.resources.limits.cpu }}"
+              memory: "{{ .Values.resources.limits.memory }}"
           livenessProbe:
             httpGet:
               path: /

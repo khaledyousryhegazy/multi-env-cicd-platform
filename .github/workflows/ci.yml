@@ -3,6 +3,7 @@ on:
   push:
     branches:
       - main
+      - develop
 jobs:
   build-and-push-code:
     runs-on: ubuntu-latest
@@ -10,7 +11,7 @@ jobs:
       id-token: write
       contents: read
     steps:
-      - name: Checkout
+      - name: Checkout code
         uses: actions/checkout@v7.0.0
 
       - name: Setup Node.js environment

@@ -1,0 +1,42 @@
+name: Multi environment CI/CD pipeline [DEV]
+on:
+  workflow_run:
+    workflows: ["Multi environment CI/CD pipeline"]
+    types:
+      - completed
+    branches: [develop]
+
+jobs:
+  setup-infra-deploy:
+    if: github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v7.0.0
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v6.1.0
+        with:
+          audience: sts.amazonaws.com
+          aws-region: ${{ secrets.AWS_REGION }}
+          role-to-assume: ${{ secrets.ROLE_TO_ASSUME }}
+          role-session-name: github-actions-session
+
+      - name: Update Kubeconfig
+        run: aws eks update-kubeconfig --name multi-cicd-eks --region ${{ secrets.AWS_REGION }}
+
+      - name: Setup helm
+        uses: Azure/setup-helm@v5.0.1
+
+      - name: Apply helm
+        run: |
+          cd helm
+          helm upgrade --install myapp . \
+          -f values-dev.yaml \
+          --set backend.image.tag=${{ github.event.workflow_run.head_sha }} \
+          --set frontend.image.tag=${{ github.event.workflow_run.head_sha }} \
+          -n myapp --create-namespace --timeout 10m

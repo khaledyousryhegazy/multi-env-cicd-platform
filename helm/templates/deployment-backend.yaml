@@ -6,7 +6,7 @@ metadata:
     app.kubernetes.io/name: backend-deployment
     app.kubernetes.io/managed-by: Helm
 spec:
-  replicas: 2
+  replicas: {{ .Values.backend.replicaCount | int }}
   selector:
     matchLabels:
       app.kubernetes.io/name: backend-deployment
@@ -37,11 +37,11 @@ spec:
                 name: secret-myapp
           resources:
             requests:
-              cpu: "250m"
-              memory: "256Mi"
+              cpu: "{{ .Values.resources.requests.cpu }}"
+              memory: "{{ .Values.resources.requests.memory }}"
             limits:
-              cpu: "500m"
-              memory: "512Mi"
+              cpu: "{{ .Values.resources.limits.cpu }}"
+              memory: "{{ .Values.resources.limits.memory }}"
           livenessProbe:
             httpGet:
               path: /api/health
