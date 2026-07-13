@@ -8,7 +8,7 @@ terraform {
   }
 
   backend "s3" {
-    region         = var.region
+    region         = "us-east-1"
     bucket         = "terraform-state-604275788373-us-east-1-an"
     dynamodb_table = "terraform-state-lock"
     key            = "multi-env-cicd-platform/terraform.tfstate"
