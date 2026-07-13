@@ -32,11 +32,7 @@ jobs:
           role-session-name: github-actions-session
 
       - name: Update Kubeconfig
-        run: |
-          aws --version
-          aws sts get-caller-identity
-          aws eks update-kubeconfig --name multi-cicd-eks --region ${{ secrets.AWS_REGION }}
-          kubectl get nodes
+        run:  aws eks update-kubeconfig --name multi-cicd-eks --region ${{ secrets.AWS_REGION }}
 
       - name: Setup helm
         uses: Azure/setup-helm@v5.0.1
